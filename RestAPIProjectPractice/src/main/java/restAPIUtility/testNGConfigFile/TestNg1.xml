@@ -5,6 +5,12 @@
 <test name="testngTest">
  <classes>
  	<class name="restApiTests.StatusLineHeaderExample" />
+ 	<class name="restApiTests.DynamicJSONWithDeleteData" />
+ 	<class name="restApiTests.AddDeletePlaceWithStaticJSON" />
+ 	<class name="restApiTests.AddDeletePlaceWithPOJO" />
+ 	<class name="restApiTests.AddDeletePlaceWithHashMap" />
+ 	<class name="restApiTests.OAuth2ClientCredentials" />
+ 	<class name="restApiTests.OAuth2AuthorizationCode" />
  </classes>
  </test>
   

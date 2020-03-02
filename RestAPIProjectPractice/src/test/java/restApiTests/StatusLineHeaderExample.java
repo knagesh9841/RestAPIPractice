@@ -3,9 +3,11 @@ package restApiTests;
 import org.testng.annotations.Test;
 
 import io.restassured.RestAssured;
+import io.restassured.http.Header;
+import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import io.restassured.response.ResponseBody;
+import restAPIUtility.Utilities;
 
 import org.testng.annotations.BeforeTest;
 
@@ -24,11 +26,10 @@ public class StatusLineHeaderExample {
 	@Test
 	public void googleBasicAPI() {
 
-		String body = "{\\r\\n\\r\\n\\\"name\\\":\\\"Learn Appium Automation with Java\\\",\\r\\n\\\"isbn\\\":\\\"bcdqwe\\\",\\r\\n\\\"aisle\\\":\\\"227123\\\",\\r\\n\\\"author\\\":\\\"John foe\\\"\\r\\n}\\r\\n";
-
+		
 		Response response = given().
 				header("Content-Type","application/json").
-				body(body).
+				body(Utilities.returnJsonData("ojfwtyy","936")).
 				when().
 				post("/Library/Addbook.php").
 				then().
@@ -39,9 +40,31 @@ public class StatusLineHeaderExample {
 		System.out.println("Status Code:"+response.getStatusCode());
 		System.out.println("Status Line:"+response.getStatusLine());
 		System.out.println("Response Header:"+response.getHeaders());
+		System.out.println("Response header Server:-"+response.getHeader("Server"));
 		
+		Headers allHeaders = response.headers();
+
+		for(Header header : allHeaders)
+		{
+			System.out.println("Key: " + header.getName() + " Value: " + header.getValue());
+		}
+
+		String respString = response.asString();
 		
+		System.out.println("Response is :- "+respString);
+		JsonPath js = new JsonPath(respString);
 		
+		System.out.println("Result is:- "+js.get("Msg"));
+		
+		response = given().log().all().
+				header("Content-Type","application/json").
+				body(Utilities.deleteData("ojfwtyy","936")).
+				when().
+				post("/Library/DeleteBook.php").
+				then().log().all().
+				extract().response();
+		
+		System.out.println("Response Deleted is :- "+response.asString());
 		
 	}
 
