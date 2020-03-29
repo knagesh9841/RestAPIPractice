@@ -11,6 +11,7 @@
  	<class name="restApiTests.AddDeletePlaceWithHashMap" />
  	<class name="restApiTests.OAuth2ClientCredentials" />
  	<class name="restApiTests.OAuth2AuthorizationCode" />
+ 	<class name="restApiTests.JsonTraverse" />
  </classes>
  </test>
   
